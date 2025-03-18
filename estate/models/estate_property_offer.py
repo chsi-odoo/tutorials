@@ -4,6 +4,7 @@ import datetime
 from datetime import timedelta
 from typing import Collection
 
+from .estate_property import *
 from odoo import api, models, fields
 
 class EstatePropertyOffer(models.Model):
