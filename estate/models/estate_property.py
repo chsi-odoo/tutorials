@@ -4,7 +4,8 @@ from datetime import timedelta
 from dateutil.relativedelta import relativedelta
 from typing import Collection
 
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
+
 
 # this isnt working lmao
 
@@ -12,6 +13,11 @@ class EstateProperty(models.Model):
     _name = 'estate.property'
 
     _description = "Estate property"
+
+    _sql_constraints = [
+        ('check_expected_price', 'CHECK(expected_price > 0)','Expected price must be positive'),
+        ('check_selling_price', 'CHECK(selling_price >= 0)','Selling price must be non-negative'),
+    ]
 
     active = fields.Boolean(default=True)
     state = fields.Selection(
@@ -77,6 +83,15 @@ class EstateProperty(models.Model):
                 raise UserError('Canceled properties cannot be sold')
 
             record.state = 'sold'
+
+    @api.constrains("selling_price")
+    def _check_selling_price(self: Collection[EstateProperty]):
+        for record in self:
+            threshold = record.expected_price * 0.9 or 0
+            offer_statuses: Collection[str] = record.offer_ids.mapped('status')
+            is_offer_being_accepted = any(status == 'accepted' for status in offer_statuses)
+            if is_offer_being_accepted and record.selling_price < threshold:
+                raise ValidationError("The selling price is (message is too long...)")
 
 
 
