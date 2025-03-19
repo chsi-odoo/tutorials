@@ -19,6 +19,8 @@ class EstateProperty(models.Model):
         ('check_selling_price', 'CHECK(selling_price >= 0)','Selling price must be non-negative'),
     ]
 
+    _order = "id desc"
+
     active = fields.Boolean(default=True)
     state = fields.Selection(
         string='Status',
