@@ -1,5 +1,54 @@
 <?xml version="1.0"?>
 <odoo>
+    <record id="estate_property_view_kanban" model="ir.ui.view">
+        <field name="name">estate.property.kanban</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" groups_draggable="False" records_draggable="False">
+                <templates>
+
+                    <t t-name="kanban-box">
+                        <div>
+                            <!-- it works when u add it after the server is started up tho with the dev xml refresh thingy-->
+<!--                            <div><t t-log="record"/></div>-->
+<!--                            <t t-js="ctx">-->
+<!--                                console.log(record);-->
+<!--                            </t>-->
+                            <field name="state" invisible="1"/>
+
+                            <div>
+                                <b>
+                                    <field name="name"/>
+                                </b>
+                            </div>
+
+                            <t t-if="record.state">
+                                <div>
+                                    <span>Expected price: </span>
+                                    <field name="expected_price"/>
+                                </div>
+                            </t>
+                            <t t-if="record.state.raw_value == 'offer_received'">
+                                <div>
+                                    <span>Best price: </span>
+                                    <field name="best_price"/>
+                                </div>
+                            </t>
+                            <!--                            why is this not working-->
+                            <!--                            <t t-if="record.state in ['offer_accepted', 'sold']"-->
+                            <t t-if="record.state.raw_value == 'offer_accepted' or record.state == 'sold'">
+                                <div>
+                                    <span>Selling price: </span>
+                                    <field name="selling_price"/>
+                                </div>
+                            </t>
+                            <field name="tag_ids" options="{'color_field': 'color'}"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
     <record id="estate_property_view_search" model="ir.ui.view">
         <field name="name">estate.property.search</field>
         <field name="model">estate.property</field>
@@ -9,7 +58,7 @@
                 <field name="postcode"/>
                 <field name="expected_price"/>
                 <field name="bedrooms"/>
-                <field name="living_area"  filter_domain="[('living_area','&gt;=',self)]"/>
+                <field name="living_area" filter_domain="[('living_area','&gt;=',self)]"/>
                 <field name="facades"/>
                 <field name="property_type_id"/>
 
@@ -27,11 +76,14 @@
             <form string="Test">
                 <header>
                     <group>
-                        <button name="action_set_state_sold" string="Sold" type="object" invisible="state == 'offer_accepted' or state == 'cancelled' or state == 'sold'"/>
-                        <button name="action_set_state_sold" string="Sold" type="object" class="oe_highlight" invisible="state == 'new' or state == 'offer_received' or state == 'cancelled' or state == 'sold'"/>
-                        <button name="action_set_state_cancelled" string="Cancel" type="object" class="oe_highlight" invisible="state == 'cancelled' or state == 'sold'"/>
+                        <button name="action_set_state_sold" string="Sold" type="object"
+                                invisible="state == 'offer_accepted' or state == 'cancelled' or state == 'sold'"/>
+                        <button name="action_set_state_sold" string="Sold" type="object" class="oe_highlight"
+                                invisible="state == 'new' or state == 'offer_received' or state == 'cancelled' or state == 'sold'"/>
+                        <button name="action_set_state_cancelled" string="Cancel" type="object" class="oe_highlight"
+                                invisible="state == 'cancelled' or state == 'sold'"/>
                     </group>
-                        <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
                 </header>
                 <sheet>
                     <!--                    smart buttons? -->
@@ -59,7 +111,7 @@
                     </group>
                     <group>
                         <group>
-<!--                            <field name="state"/>-->
+                            <!--                            <field name="state"/>-->
                             <field name="property_type_id" options="{'no_create': True}"/>
                             <field name="postcode"/>
                             <field name="date_availability"/>
@@ -86,7 +138,8 @@
                             </group>
                         </page>
                         <page string="Offers">
-                            <field name="offer_ids" readonly="state == 'offer_accepted' or state == 'sold' or state == 'cancelled'"/>
+                            <field name="offer_ids"
+                                   readonly="state == 'offer_accepted' or state == 'sold' or state == 'cancelled'"/>
                         </page>
                         <page string="Other Info">
                             <group>
@@ -103,9 +156,10 @@
         <field name="name">estate.property.list</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <list string="Channel" decoration-success="state == 'offer_accepted' or state == 'offer_received'" decoration-bf="state == 'offer_accepted'" decoration-muted="state == 'sold'">
-<!--                <list string="Channel">-->
-<!--                <field name="state"/>-->
+            <list string="Channel" decoration-success="state == 'offer_accepted' or state == 'offer_received'"
+                  decoration-bf="state == 'offer_accepted'" decoration-muted="state == 'sold'">
+                <!--                <list string="Channel">-->
+                <!--                <field name="state"/>-->
                 <field name="name"/>
                 <field name="postcode"/>
                 <field name="bedrooms"/>
@@ -122,7 +176,7 @@
     <record id="estate_property_action" model="ir.actions.act_window">
         <field name="name">Estate property action</field>
         <field name="res_model">estate.property</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">list,form,kanban</field>
         <field name="context">{"search_default_available_filter":1}</field>
     </record>
 </odoo>
