@@ -2,9 +2,10 @@ from __future__ import annotations
 from odoo import api, models, fields
 from datetime import timedelta
 from dateutil.relativedelta import relativedelta
-from typing import Collection
+from typing import Collection, Iterable
 
 from odoo.exceptions import UserError, ValidationError
+from .estate_property_offer import EstatePropertyOffer
 
 
 # this isnt working lmao
@@ -95,7 +96,7 @@ class EstateProperty(models.Model):
             if is_offer_being_accepted and record.selling_price < threshold:
                 raise ValidationError("The selling price is (message is too long...)")
 
-
-
-
-
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_cancellable_state(self: Collection[EstateProperty]):
+        if any(record.state not in ('new', 'cancelled') for record in self):
+            raise UserError('No cancelling plzz')

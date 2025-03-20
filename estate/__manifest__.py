@@ -15,6 +15,7 @@
         'views/estate_property_tag_views.xml',
         'views/estate_property_offer_views.xml',
         'views/estate_menus.xml',
+        "views/res_user_views.xml"
     ],
     # # data files containing optionally loaded demonstration data
     # 'demo': [

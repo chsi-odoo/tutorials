@@ -90,3 +90,22 @@ class EstatePropertyOffer(models.Model):
                     #maybe disallow changing offer statuses after property has been sold?
                     if is_parent_status_non_terminal:
                         estate_property.state = 'offer_received'
+
+
+    @api.model
+    def create(self, vals):
+        estate_property: EstateProperty = self.env['estate.property'].browse(vals['property_id'])
+        print('hi')
+        print(vals)
+        print(estate_property)
+        siblings: Collection[EstatePropertyOffer] = estate_property.offer_ids
+        lowest_offer_price = min([sibling.price for sibling in siblings]) if len(siblings) else float('-inf')
+        print(lowest_offer_price)
+
+        if vals['price'] < lowest_offer_price:
+            raise UserError('Cannot create an offer with a lower price')
+        created = super(EstatePropertyOffer, self).create(vals)
+
+        estate_property.state = 'offer_received'
+        return created
+
