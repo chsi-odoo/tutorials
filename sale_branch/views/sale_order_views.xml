@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="sale_order_view_form" model="ir.ui.view">
+            <field name="model">sale.order</field>
+            <field name="name">sale.order.view.form.inherit</field>
+<!--            <field name="mode">extension</field>-->
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr='//group[@name="order_details"]' poisition="inside">
+                    <field name="branch_id" options="{'no_quick_create': true}"/>
+                </xpath>
+            </field>
+        </record>
+
+<!--        <record id="sale_order_menu_todo" model="ir.ui.menu">-->
+<!--            <field name="model"></field>-->
+
+<!--        </record>-->
+    </data>
+</odoo>

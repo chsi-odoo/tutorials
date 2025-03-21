@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--    <menuitem-->
+<!--            id="test_menu_sale_config"-->
+<!--            name="this should be the least layer"-->
+<!--            parent="sale.menu_sale_config"-->
+<!--    >-->
+<!--        <menuitem-->
+<!--                id="sale_branch_menu"-->
+<!--                name="Sale Branch"-->
+<!--                action="sale_branch_action"-->
+<!--        />-->
+<!--    </menuitem>-->
+
+        <menuitem
+                id="sale_branch_menu"
+                name="Sale Branch"
+                action="sale_branch_action"
+            parent="sale.menu_sale_config"
+                sequence="100000"
+    />
+</odoo>

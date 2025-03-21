@@ -51,6 +51,7 @@ class EstateProperty(models.Model):
     offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")
     total_area = fields.Float(compute='_compute_total_area')
     best_price = fields.Float(compute='_compute_best_price', string='Best Offer')
+    dummy_field = fields.Text()
 
     @api.depends("living_area","garden_area")
     def _compute_total_area(self: Collection[EstateProperty]):
