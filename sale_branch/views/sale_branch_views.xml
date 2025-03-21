@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <data>
+        <record id="sale_branch_view_search" model="ir.ui.view">
+            <field name="name">sale.branch.view.search</field>
+            <field name="model">sale.branch</field>
+            <field name="arch" type="xml">
+                <search string="i do not see this being displayed anywhere">
+                    <field name="name"/>
+                    <field name="code" />
+                </search>
+            </field>
+        </record>
+
         <record id="sale_branch_view_form" model="ir.ui.view">
             <field name="name">sale.branch.view.form</field>
             <field name="model">sale.branch</field>
@@ -9,7 +20,7 @@
                     <sheet>
                         <group>
                             <field name="name"/>
-                            <field name="code"/>
+                            <field name="code" readonly="id"/>
                         </group>
                     </sheet>
                 </form>
@@ -22,15 +33,12 @@
             <field name="arch" type="xml">
 
                 <list>
-                    <!--                        <group>-->
                     <field name="name"/>
-                    <field name="code"/>
-                    <!--                        </group>-->
+                    <field name="code" readonly="id"/>
                 </list>
 
             </field>
         </record>
-
 
         <record id="sale_branch_action" model="ir.actions.act_window">
             <field name="name">Sales Branches</field>
