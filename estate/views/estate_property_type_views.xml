@@ -23,17 +23,15 @@
                         </h1>
                     </div>
                     <field name="offer_ids" invisible="1"/>
-                    <field name="offer_count" invisible ="1"/>
+                    <field name="offer_count" invisible="1"/>
                     <div class="oe_button_box" name="button_box">
-                    <button type="action" name="%(estate_property_offer_action)d" class="oe_stat_button" string="Offers" icon="fa-money"/>
+                        <button type="action" name="%(estate_property_offer_action)d" class="oe_stat_button"
+                                string="Offers" icon="fa-money"/>
                     </div>
                     <notebook>
                         <page string="Properties">
                             <field name="property_ids"/>
                         </page>
-                        <!--                        <page string="test">-->
-                        <!--                            <field name="name"/>-->
-                        <!--                        </page>-->
                     </notebook>
                 </sheet>
             </form>

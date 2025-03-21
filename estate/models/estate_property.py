@@ -95,7 +95,7 @@ class EstateProperty(models.Model):
             offer_statuses: Collection[str] = record.offer_ids.mapped('status')
             is_offer_being_accepted = any(status == 'accepted' for status in offer_statuses)
             if is_offer_being_accepted and record.selling_price < threshold:
-                raise ValidationError("The selling price is (message is too long...)")
+                raise ValidationError(f"The selling price is {record.selling_price}(message is too long...)")
 
     @api.ondelete(at_uninstall=False)
     def _unlink_if_cancellable_state(self: Collection[EstateProperty]):

@@ -19,6 +19,7 @@
                 <form>
                     <sheet>
                         <group>
+                            <field name="id" invisible="True"/>
                             <field name="name"/>
                             <field name="code" readonly="id"/>
                         </group>
@@ -33,6 +34,7 @@
             <field name="arch" type="xml">
 
                 <list>
+                    <field name="id" invisible="True"/>
                     <field name="name"/>
                     <field name="code" readonly="id"/>
                 </list>

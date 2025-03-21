@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="demo_estate_property_3" model="estate.property">
+        <field name="name">Property created with command create</field>
+        <field name="expected_price">50000</field>
+        <field name="offer_ids" eval="[
+            Command.create({
+                'partner_id': ref('base.res_partner_12'),
+                'price': 60000,
+                'validity':14
+            }),
+            Command.create({
+                'partner_id': ref('base.res_partner_2'),
+                'price': 80000,
+                'validity':14,
+                'status':'accepted'
+            }),
+        ]"/>
+    </record>
+</odoo>

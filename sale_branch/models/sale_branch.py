@@ -12,7 +12,7 @@ class SaleBranch(models.Model):
 
     name = fields.Char(required=True)
     sequence_id = fields.Many2one("ir.sequence")
-    code = fields.Char(required=True)
+    code = fields.Char(required=True, readonly=True)
 
     @api.model
     def create(self, vals):
