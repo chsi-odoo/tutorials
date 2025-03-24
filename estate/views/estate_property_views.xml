@@ -10,10 +10,10 @@
                     <t t-name="kanban-box">
                         <div>
                             <!-- it works when u add it after the server is started up tho with the dev xml refresh thingy-->
-<!--                            <div><t t-log="record"/></div>-->
-<!--                            <t t-js="ctx">-->
-<!--                                console.log(record);-->
-<!--                            </t>-->
+                            <!--                            <div><t t-log="record"/></div>-->
+                            <!--                            <t t-js="ctx">-->
+                            <!--                                console.log(record);-->
+                            <!--                            </t>-->
                             <field name="state" invisible="1"/>
 
                             <div>
@@ -86,6 +86,11 @@
                     <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="action" name="%(estate.action_report_estate_property)d" class="oe_stat_button"
+                                string="Print" icon="fa-print"/>
+                    </div>
+
                     <!--                    smart buttons? -->
                     <!--                    <div class="oe_button_box" name="button_box">-->
                     <!--                        <button name="action_lost_leads" type="object"-->

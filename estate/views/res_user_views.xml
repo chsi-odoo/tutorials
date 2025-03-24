@@ -16,6 +16,11 @@
                         <field name="property_ids"/>
                     </page>
                 </xpath>
+
+                <xpath expr="//div[@name='button_box']" position="inside">
+                        <button type="action" name="%(estate.action_report_res_user_estate_property)d" class="oe_stat_button"
+                                string="Estate properties" icon="fa-print"/>
+                </xpath>
             </field>
         </record>
     </data>

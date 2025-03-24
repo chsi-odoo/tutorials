@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_property_offers_table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Price</th>
+                    <th>Partner</th>
+                    <th>Validity (days)</th>
+                    <th>Deadline</th>
+                    <th>State</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr t-foreach="offers" t-as="offer">
+                    <td>
+                        <span t-field="offer.price"/>
+                    </td>
+                    <td>
+                        <span t-field="offer.partner_id.name"/>
+                    </td>
+                    <td>
+                        <span t-field="offer.validity"/>
+                    </td>
+                    <td>
+                        <span t-field="offer.date_deadline"/>
+                    </td>
+                    <td>
+                        <span t-field="offer.status"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </template>
+    <template id="report_property_offers_core">
+        <!--            <div class="page">-->
+        <!--                        <div class="oe_structure"/>-->
+        <div style="margin-top: 20px">
+            <span>hi1</span>
+        </div>
+
+        <h2 style="margin-top: 20px">
+            <span t-field="property.name"/>
+        </h2>
+
+        <!--                    only rendered if called_from_res_users is not set (meaning its not called from res.user)-->
+        <t t-if="not called_from_res_users">
+            <div>
+                <strong>Salesman:</strong>
+                <span t-field="property.salesperson_id.name"/>
+            </div>
+        </t>
+        <div>
+            <strong>Expected Price:</strong>
+            <span t-field="property.expected_price"/>
+        </div>
+        <div>
+            <strong>Status:</strong>
+            <span t-field="property.state"/>
+        </div>
+        <t t-if="len(property.offer_ids)">
+            <t id="will_this_work_hmmm" t-call="estate.report_property_offers_table">
+                <t t-set="offers" t-value="property.mapped('offer_ids')"/>
+            </t>
+        </t>
+        <t t-else="">
+            <div>
+                <strong>No offers have been made yet :)</strong>
+            </div>
+        </t>
+
+        <!--                <table class="table">-->
+        <!--                    <thead>-->
+        <!--                        <tr>-->
+        <!--                            <th>Price</th>-->
+        <!--                            <th>Partner</th>-->
+        <!--                            <th>Validity (days)</th>-->
+        <!--                            <th>Deadline</th>-->
+        <!--                            <th>State</th>-->
+        <!--                        </tr>-->
+        <!--                    </thead>-->
+        <!--                    <tbody>-->
+        <!--                        <t t-set="offers" t-value="property.mapped('offer_ids')"/>-->
+        <!--                        <tr t-foreach="offers" t-as="offer">-->
+        <!--                            <td>-->
+        <!--                                <span t-field="offer.price"/>-->
+        <!--                            </td>-->
+        <!--                            <td>-->
+        <!--                                <span t-field="offer.partner_id.name"/>-->
+        <!--                            </td>-->
+        <!--                            <td>-->
+        <!--                                <span t-field="offer.validity"/>-->
+        <!--                            </td>-->
+        <!--                            <td>-->
+        <!--                                <span t-field="offer.date_deadline"/>-->
+        <!--                            </td>-->
+        <!--                            <td>-->
+        <!--                                <span t-field="offer.status"/>-->
+        <!--                            </td>-->
+        <!--                        </tr>-->
+        <!--                    </tbody>-->
+        <!--                </table>-->
+        <!--            </div>-->
+        <div class="container-fluid">
+            <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+            <div class="row">
+                <div class="col-xs-12 col-md-8">.col-xs-12 .col-md-8</div>
+                <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+            </div>
+
+            <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+            <div class="row">
+                <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+                <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+                <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+            </div>
+
+            <!-- Columns are always 50% wide, on mobile and desktop -->
+            <div class="row">
+                <div class="col-xs-6">.col-xs-6</div>
+                <div class="col-xs-6">.col-xs-6</div>
+            </div>
+        </div>
+    </template>
+
+    <template id="report_property_offers">
+        <t t-foreach="docs" t-as="property">
+            <!--            <t t-set="company" t-value="env.company"/>-->
+            <t t-call="web.html_container">
+                <!--                <t t-set="o" t-value="res_company"/>-->
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <t t-call="estate.report_property_offers_core"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!--    references -->
+
+    <template id="report_saleorder_raw">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="sale.report_saleorder_document" t-lang="doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_saleorder">
+        <t t-call="sale.report_saleorder_raw"/>
+    </template>
+
+    <template id="report_saleorder_pro_forma">
+        <t t-call="web.html_container">
+            <t t-set="is_pro_forma" t-value="True"/>
+            <t t-set="docs" t-value="docs.with_context(proforma=True)"/>
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="sale.report_saleorder_document" t-lang="doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+    <!-- Allow edits (e.g. studio) without changing the often inherited base template -->
+    <template id="document_tax_totals" inherit_id="account.document_tax_totals_template" primary="True"></template>
+
+    <template id="quote_document_layout_preview">
+        <t t-call="web.html_preview_container">
+            <t t-call="sale.report_saleorder_document"/>
+        </t>
+    </template>
+
+    <template id="report_res_user_property_offers">
+        <t t-set="called_from_res_users" t-value="True"/>
+        <t t-foreach="docs" t-as="user">
+            <!--            <t t-set="company" t-value="env.company"/>-->
+            <t t-call="web.html_container">
+                <!--                <t t-set="o" t-value="res_company"/>-->
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h1>
+                            <strong>Salesman:</strong>
+                            <span t-field="user.name"/>
+                        </h1>
+                        <t t-foreach="user.property_ids" t-as="property">
+                            <t t-call="estate.report_property_offers_core"/>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_property_offers_core_inherit_invoice" inherit_id="estate.report_property_offers_core">
+        <xpath expr="//t[@id='will_this_work_hmmm']" position="before">
+            <t t-if="any(status == 'accepted' for status in property.offer_ids.mapped('status'))">
+                <strong>!!!Invoice has already been created!!!</strong>
+            </t>
+        </xpath>
+    </template>
+</odoo>
