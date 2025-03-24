@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="paperformat_estate_property" model="report.paperformat">
+<!--    <record id="paperformat_estate_property" model="report.paperformat">-->
+    <record id="i_hope_its_not_due_to_defaults_lmao" model="report.paperformat">
         <field name="name">Custom Paperformat for the Estate Property report</field>
         <field name="default" eval="False"/>
         <field name="disable_shrinking" eval="True"/>
@@ -22,7 +23,7 @@
         <field name="report_name">estate.report_property_offers</field>
         <field name="report_file">estate.report_property_offers</field>
         <field name="print_report_name">'Estate property details for - %s' % (object.name or 'Estate')</field>
-        <field name="paperformat_id" ref="estate.paperformat_estate_property"/>
+<!--        <field name="paperformat_id" ref="estate.paperformat_estate_property"/>-->
         <field name="binding_model_id" ref="estate.model_estate_property"/>
         <field name="binding_type">report</field>
     </record>
