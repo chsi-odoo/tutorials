@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_invoice_document_inherit_sales_person" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@id='informations']" position="inside">
+
+            <div class="col" t-if="o.invoice_user_id" name="invoice_user_id_name">
+                <strong>Salesperson</strong>
+                <div t-field="o.invoice_user_id.name">Is this for defaults</div>
+            </div>
+
+        </xpath>
+    </template>
+
+    <template id="document_tax_totals_template_inherit_text_description"
+              inherit_id="account.document_tax_totals_template">
+        <xpath expr="." position="inside">
+            <tr class="">
+                <td/>
+                <td class="text-end">
+                    <!--                                        <strong t-out="tax_totals['total_amount_currency']"
+                                                t-options='{"widget": "monetary", "display_currency": currency}'
+                                        >31.05</strong>
+                                        -->
+                    <span t-out="currency.with_context(lang='en_US').amount_to_text(tax_totals['total_amount_currency'])"/>
+<!--                    <span t-out="'%.2f %s' % (tax_totals['total_amount_currency'], currency.name)"/>-->
+                </td>
+            </tr>
+        </xpath>
+    </template>
+
+    <template id="report_invoice_document_inherit_signature" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@id='right-elements']" position="inside">
+            <div>
+                <div style="margin-left: 7%;">
+                    <span>Sign here,</span>
+                </div>
+                <div style="margin-bottom: 4cm;"/>
+                <hr style="border-color:black; margin-left: auto; margin-right:auto; width: 80%;"/>
+            </div>
+<!--            <div>-->
+<!--                <div id="signature-sign-here">-->
+<!--                    <span>Sign here,</span>-->
+<!--                </div>-->
+<!--                <div id="signature-spacing"/>-->
+<!--                <hr id="signature-underline"/>-->
+<!--            </div>-->
+        </xpath>
+    </template>
+</odoo>

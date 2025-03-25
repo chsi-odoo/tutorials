@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="view_partner_tree" model="ir.ui.view">
+            <field name="name">res.partner.view.list.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//list" position="inside">
+                    <button type="action" name="better_report.action_report_res_partners" string="Print"/>
+                </xpath>
+            </field>
+
+        </record>
+
+    </data>
+</odoo>

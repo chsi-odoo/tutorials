@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_report_res_partners" model="ir.actions.report">
+        <field name="name">Print contacts</field>
+        <field name="model">res.partner</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">better_report.report_res_partners</field>
+        <field name="report_file">better_report.report_res_partners</field>
+        <field name="print_report_name">Partner contacts</field>
+        <field name="binding_model_id" ref="base.model_res_partner"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
