@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- i wonder when is the odoo tag needed -->
+<!--<odoo>-->
+    <templates xml:space="reserved">
+        <t t-name="awesome_owl.todo_item">
+            <div style="width: fit-content;">
+                <span t-out="this.props.id"/>
+                <span>. </span>
+                <span t-out="this.props.description"/>
+
+            </div>
+        </t>
+
+        <t t-name="awesome_owl.todo_list">
+<!--            <span t-out="this"/>-->
+            <t t-foreach="this.todos" t-as="item" t-key="item.id">
+                <TodoItem id="item.id" description="item.description" isCompleted="item.isCompleted"/>
+            </t>
+        </t>
+
+
+    </templates>
+<!--</odoo>-->

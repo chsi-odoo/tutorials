@@ -2,8 +2,49 @@
 <templates xml:space="preserve">
 
     <t t-name="awesome_owl.playground">
-        <div class="p-3">
-            hello world
+
+        <div class="border p-3 mt-3 m-auto d-flex flex-wrap align-items-center justify-content-center"
+             style="width: fit-content;">
+            <span>hello world</span>
+<!--            <t t-foreach="this.counterInitialValues" t-as="val" t-key="val">-->
+<!--                <div>-->
+<!--                    <span>😠</span>-->
+<!--                </div>-->
+<!--            </t>-->
+            <t t-foreach="this.counterInitialValues" t-as="val" t-key="val">
+                <Counter initialValue="val" onChange="this.incrementSum"/>
+            </t>
+<!--            <div style="flex-basis:100%; height: 0;"/>-->
+            <hr style="width: 100%; border: 0;"/>
+                        <div id="accumulator" style="margin-right: auto;">
+            <span>The sum is <t t-out="this.state.value"/></span>
+                </div>
+        </div>
+
+
+
+        <div class="my-4"/>
+
+        <div class="border p-3 m-auto d-flex flex-wrap align-items-center justify-content-center" style="width: fit-content;">
+            <Card title="'Hi'" content="'Hi2'"/>
+            <Card title="'Bye'" content="'Bye2'"/>
+        </div>
+
+        <div class="my-4"/>
+
+        <div class="border p-3 m-auto d-flex flex-wrap   align-items-center justify-content-center" style="width: fit-content;">
+            <Card title="'Escaped'" content="'&lt;div class=\'text-primary\'&gt;i am blue&lt;/div&gt;'"/>
+            <Card title="'Unescaped(dangerous)'" content="dangerousUnescapedValue"/>
+        </div>
+        <!--        <div class="border-container p-3 m-auto d-flex align-items-center justify-content-center" style="border: 2px solid black; display: inline-flex; width: fit-content;">-->
+        <!--            <Card title="'Hi'" content="'Hi2'"/>-->
+        <!--            <Card title="'Bye'" content="'Bye2'"/>-->
+        <!--        </div>        -->
+
+        <div class="my-4"/>
+
+        <div class="border p-3 m-auto d-flex flex-column flex-wrap   align-items-center justify-content-center" style="width: fit-content;">
+            <TodoList/>
         </div>
     </t>
 

@@ -36,6 +36,18 @@
             ('include', 'web._assets_core'),
             'web/static/src/libs/fontawesome/css/font-awesome.css',
             'awesome_owl/static/src/**/*',
+
+            # 'web/static/src/scss/import_bootstrap.scss',
+            # 'web/static/src/scss/utilities_custom.scss',
+            # 'web/static/lib/bootstrap/scss/utilities/_api.scss',
+            # 'web/static/src/scss/bootstrap_review.scss',
+        ],
+        # ????
+        'awesome_owl._assets_bootstrap': [
+            'web/static/src/scss/import_bootstrap.scss',
+            'web/static/src/scss/utilities_custom.scss',
+            'web/static/lib/bootstrap/scss/utilities/_api.scss',
+            'web/static/src/scss/bootstrap_review.scss',
         ],
     },
     'license': 'AGPL-3'
