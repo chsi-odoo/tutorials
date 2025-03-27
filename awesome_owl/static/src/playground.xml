@@ -26,8 +26,29 @@
         <div class="my-4"/>
 
         <div class="border p-3 m-auto d-flex flex-wrap align-items-center justify-content-center" style="width: fit-content;">
-            <Card title="'Hi'" content="'Hi2'"/>
-            <Card title="'Bye'" content="'Bye2'"/>
+            <Card title="'Hi'">
+                <p class="card-text" t-out="this.props.title"/>
+            </Card>
+            <Card title="'Hi2'"/>
+            <Card title="'Counters'">
+                <Counter initialValue="3" onChange="() => {}"/>
+            </Card>
+
+            <t t-set="nestedCardsTitle" t-value="'woww'"/>
+
+            <Card title="nestedCardsTitle">
+                <Card title="nestedCardsTitle">
+                    <Card title="nestedCardsTitle"/>
+                </Card>
+            </Card>
+
+<!--            <Card title="{{nested-cards-title}}">-->
+<!--                <Card title="{{nested-cards-title}}">-->
+<!--                    <Card title="{{nested-cards-title}}"/>-->
+<!--                </Card>-->
+<!--            </Card>-->
+<!--            <Card title="'Hi'" content="'Hi2'"/>-->
+<!--            <Card title="'Bye'" content="'Bye2'"/>-->
         </div>
 
         <div class="my-4"/>

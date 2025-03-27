@@ -43,12 +43,12 @@
             # 'web/static/src/scss/bootstrap_review.scss',
         ],
         # ????
-        'awesome_owl._assets_bootstrap': [
-            'web/static/src/scss/import_bootstrap.scss',
-            'web/static/src/scss/utilities_custom.scss',
-            'web/static/lib/bootstrap/scss/utilities/_api.scss',
-            'web/static/src/scss/bootstrap_review.scss',
-        ],
+        # 'awesome_owl._assets_bootstrap': [
+        #     'web/static/src/scss/import_bootstrap.scss',
+        #     'web/static/src/scss/utilities_custom.scss',
+        #     'web/static/lib/bootstrap/scss/utilities/_api.scss',
+        #     'web/static/src/scss/bootstrap_review.scss',
+        # ],
     },
     'license': 'AGPL-3'
 }

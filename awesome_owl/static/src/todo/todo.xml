@@ -2,23 +2,32 @@
 
 <!-- i wonder when is the odoo tag needed -->
 <!--<odoo>-->
-    <templates xml:space="reserved">
-        <t t-name="awesome_owl.todo_item">
-            <div style="width: fit-content;">
-                <span t-out="this.props.id"/>
-                <span>. </span>
-                <span t-out="this.props.description"/>
+<templates xml:space="reserved">
+    <t t-name="awesome_owl.todo_item">
+        <div t-att-class="{'text-decoration-line-through': this.props.isCompleted, 'text-muted': this.props.isCompleted}"
+             style="width: fit-content;">
+            <input class="mx-2" type="checkbox" t-att-checked="this.props.isCompleted" t-on-click="handleCheck"/>
+            <span t-out="this.props.id"/>
+            <span>.</span>
+            <span t-out="this.props.description"/>
+            <span class="px-2 fa fa-remove" t-on-click="handleRemove"/>
+        </div>
+    </t>
 
-            </div>
+    <t t-name="awesome_owl.todo_list">
+        <input t-ref="input-box" class="mb-4 m-auto focus-ring" type="text" placeholder="Enter a new task"
+               t-on-keyup="(event) => this.addTodo(event)"/>
+        <!--            <input class="m-auto" type="text" placeholder="Enter a new task" t-on-keyup="this.addTodo"/>-->
+
+        <!--            <span t-out="this"/>-->
+        <t t-foreach="this.todos" t-as="item" t-key="item.id">
+<!--                            <TodoItem id="item.id" description="item.description" isCompleted="item.isCompleted" onClick="this.toggleState"/>-->
+            <TodoItem id="item.id" description="item.description" isCompleted="item.isCompleted" onClick="(item,event) => {
+                this.toggleState(item,event);}
+                " onRemove="(item) => this.removeItem(item)"/>
         </t>
-
-        <t t-name="awesome_owl.todo_list">
-<!--            <span t-out="this"/>-->
-            <t t-foreach="this.todos" t-as="item" t-key="item.id">
-                <TodoItem id="item.id" description="item.description" isCompleted="item.isCompleted"/>
-            </t>
-        </t>
+    </t>
 
 
-    </templates>
-<!--</odoo>-->
+</templates>
+        <!--</odoo>-->

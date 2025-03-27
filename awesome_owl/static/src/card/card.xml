@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
     <t t-name="awesome_owl.card">
-        <div class="card d-inline-block m-2" style="width: 18rem;">
+<!--        <div class="card d-inline-block m-2" style="width: 18rem;">-->
+        <div class="card m-2" style="min-width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title" t-out="this.props.title"/>
+<!--                <div class="d-inline-block">-->
+<!--                <div class="row">-->
+<!--                    <div style="width: fit-content;">-->
+                <div>
+                <h5 class="card-title my-auto d-inline-block" t-out="this.props.title"/>
+<!--                    </div>-->
 
-                <p class="card-text" t-out="this.props.content"/>
-
+<!--                    <div class="col-sm-6">-->
+                <button class="btn btn-primary d-inline-block" t-on-click="() => this.handleClick()">Toggle</button>
+                    </div>
+<!--                        </div>-->
+<!--                </div>-->
+<!--                    </div>-->
+                <t t-if="this.state.isOpen">
+                <t t-slot="default">
+                    <t t-if="this.props.content">
+                        <p class="card-text" t-out="this.props.content"/>
+                    </t>
+                    <t t-else="">
+                        <p class="card-text">Hiiiiii</p>
+                    </t>
+                </t>
+                </t>
             </div>
         </div>
     </t>
