@@ -6,6 +6,8 @@ import { ProductScreen } from "@point_of_sale/app/screens/product_screen/product
 import {
     BACKSPACE
 } from "@point_of_sale/app/generic_components/numpad/numpad";
+import { ControlButtons } from "@point_of_sale/app/screens/product_screen/control_buttons/control_buttons";
+import { useService } from "@web/core/utils/hooks";
 
 patch(PosStore.prototype, {
     async getProductInfo(product, quantity, priceExtra = 0) {
@@ -25,6 +27,20 @@ patch(PosStore.prototype, {
 })
 
 patch(ProductScreen.prototype, {
+    onClickRemoveButton() {
+        console.log(this.numberBuffer)
+        const backspaceValue = BACKSPACE.value
+        this.numberBuffer.sendKey(backspaceValue);
+        this.numberBuffer.sendKey(backspaceValue);
+    }
+})
+
+patch(ControlButtons.prototype, {
+    setup() {
+      super.setup()
+        this.numberBuffer = useService("number_buffer");
+        
+    },
     onClickRemoveButton() {
         console.log(this.numberBuffer)
         const backspaceValue = BACKSPACE.value

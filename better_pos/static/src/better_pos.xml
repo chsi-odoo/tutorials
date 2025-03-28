@@ -61,4 +61,11 @@
         </xpath>
 
     </t>
+
+    <t t-name="point_of_sale.ControlButtons" t-inherit="point_of_sale.ControlButtons" t-inherit-mode="extension">
+<!--        <xpath expr="//t[@t-if='props.showRemainingButtons']/div/OrderlineNoteButton" position="after">-->
+        <xpath expr="//SelectPartnerButton" position="after">
+            <button class="set-partner btn btn-light btn-lg lh-lg text-truncate w-auto" t-on-click="() => {console.log('hit'); console.log(this); this.onClickRemoveButton();}">Clear</button>
+        </xpath>
+    </t>
 </templates>
