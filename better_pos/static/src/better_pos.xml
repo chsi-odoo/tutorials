@@ -50,22 +50,34 @@
         </xpath>
     </t>
 
-    <t t-name="point_of_sale.ProductScreen" t-inherit="point_of_sale.ProductScreen" t-inherit-mode="extension">
-        <xpath expr="//div[contains(@class, 'pads')]" position="after">
-            <t t-if="!currentOrder?.is_empty() and pos.get_order()?.uiState.selected_orderline_uuid">
-            <div id="remove-button">
-                <button class="btn btn-primary"
-                        t-on-click="() => {console.log('hit'); console.log(this); this.onClickRemoveButton();}">REMOVE</button>
-            </div>
-            </t>
-        </xpath>
+<!--    <t t-name="point_of_sale.ProductScreen" t-inherit="point_of_sale.ProductScreen" t-inherit-mode="extension">-->
+<!--        <xpath expr="//div[contains(@class, 'pads')]" position="after">-->
+<!--            <t t-if="!currentOrder?.is_empty() and pos.get_order()?.uiState.selected_orderline_uuid">-->
+<!--            <div id="remove-button">-->
+<!--                <button class="btn btn-primary"-->
+<!--                        t-on-click="() => {console.log('hit'); console.log(this); this.onClickRemoveButton();}">REMOVE</button>-->
+<!--            </div>-->
+<!--            </t>-->
+<!--        </xpath>-->
 
-    </t>
+<!--    </t>-->
 
     <t t-name="point_of_sale.ControlButtons" t-inherit="point_of_sale.ControlButtons" t-inherit-mode="extension">
 <!--        <xpath expr="//t[@t-if='props.showRemainingButtons']/div/OrderlineNoteButton" position="after">-->
         <xpath expr="//SelectPartnerButton" position="after">
             <button class="set-partner btn btn-light btn-lg lh-lg text-truncate w-auto" t-on-click="() => {console.log('hit'); console.log(this); this.onClickRemoveButton();}">Clear</button>
+        </xpath>
+    </t>
+
+    <t t-name="point_of_sale.OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+        <xpath expr="//div[contains(@class,'before-footer')]" position="after">
+<!--            <h1>HELLLLO</h1>-->
+<!--            <span>HIIII</span>-->
+            <t t-if="props.data.headerData.congratulatory_text">
+                    <div id="congratulatory_text" class="text-center">
+                        <t t-out="props.data.headerData.congratulatory_text"/>
+                    </div>
+                </t>
         </xpath>
     </t>
 </templates>

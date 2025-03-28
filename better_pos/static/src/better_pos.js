@@ -49,6 +49,16 @@ patch(ControlButtons.prototype, {
     }
 })
 
+patch(PosStore.prototype, {
+        getReceiptHeaderData(order) {
+            const baseData = super.getReceiptHeaderData(...arguments);
+
+        return {
+            ...baseData,
+            congratulatory_text: this.config.congratulatory_text
+        };
+    }
+})
 // patch(, {
 //     get_product_info_pos(self, price, quantity, pos_config_id) {
 //
