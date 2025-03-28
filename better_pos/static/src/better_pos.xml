@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<templates xml:space="preserve">
+    <t t-name="point_of_sale.ProductInfoPopup" t-inherit="point_of_sale.ProductInfoPopup" t-inherit-mode="extension">
+<!--        <xpath expr="//div[hasClass('financials-order')]"  position="inside">-->
+        <xpath expr="//div[contains(@class,'financials-order')]"  position="after">
+            <div class="mt-3 mb-4 pb-4 border-bottom text-start">
+            <h3 class="section-title">
+                Logistics
+            </h3>
+            </div>
+<!--ref-->
+            <!--
+            <div class="section-inventory mt-3 mb-4 pb-4 border-bottom text-start" t-if="!isVariant and props.info.productInfo.warehouses.length > 0">
+                <h3 class="section-title">
+                    Inventory
+                    <t t-if="pos.session.update_stock_at_closing">(as of opening)</t>
+                </h3>
+                <div class="section-inventory-body">
+                    <t t-foreach="props.info.productInfo.warehouses" t-as="warehouse" t-key="warehouse.name">
+                        <div class="d-flex flex-column flex-md-row gap-2">
+                            <div>
+                                <t t-esc="warehouse.name" class="table-name"/>
+                                :
+                            </div>
+                            <div>
+                                <span class="me-1 fw-bolder"><t t-esc="warehouse.available_quantity" class="table-name"/></span>
+                                <t t-esc="warehouse.uom"/> available,
+                            </div>
+                            <div>
+                                <span class="me-1 fw-bolder"><t t-esc="warehouse.forecasted_quantity"/></span>
+                                forecasted
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+            -->
+        </xpath>
+    </t>
+</templates>
