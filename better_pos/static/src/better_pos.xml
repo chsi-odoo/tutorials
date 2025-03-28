@@ -3,11 +3,22 @@
 <templates xml:space="preserve">
     <t t-name="point_of_sale.ProductInfoPopup" t-inherit="point_of_sale.ProductInfoPopup" t-inherit-mode="extension">
 <!--        <xpath expr="//div[hasClass('financials-order')]"  position="inside">-->
+
         <xpath expr="//div[contains(@class,'financials-order')]"  position="after">
-            <div class="mt-3 mb-4 pb-4 border-bottom text-start">
+            <!--        TODO: add css for section-logistics -->
+            <div class="section-logistics mt-3 mb-4 pb-4 border-bottom text-start">
             <h3 class="section-title">
                 Logistics
             </h3>
+<!--                TODO: add css -->
+                <div class="section-logistics-body">
+                    <div id="weight">
+                        Weight: <span t-out="props.info.productInfo.weight"/>
+                    </div>
+                    <div id="volume">
+                        Volume: <span t-out="props.info.productInfo.volume"/>
+                    </div>
+                </div>
             </div>
 <!--ref-->
             <!--
