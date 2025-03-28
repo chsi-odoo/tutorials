@@ -2,6 +2,10 @@
 
 import { patch } from "@web/core/utils/patch";
 import { PosStore } from "@point_of_sale/app/store/pos_store";
+import { ProductScreen } from "@point_of_sale/app/screens/product_screen/product_screen";
+import {
+    BACKSPACE
+} from "@point_of_sale/app/generic_components/numpad/numpad";
 
 patch(PosStore.prototype, {
     async getProductInfo(product, quantity, priceExtra = 0) {
@@ -17,6 +21,15 @@ patch(PosStore.prototype, {
         productInfo.volume = actualProduct.volume
         // return baseProductInfo
         return baseProductInfo
+    }
+})
+
+patch(ProductScreen.prototype, {
+    onClickRemoveButton() {
+        console.log(this.numberBuffer)
+        const backspaceValue = BACKSPACE.value
+        this.numberBuffer.sendKey(backspaceValue);
+        this.numberBuffer.sendKey(backspaceValue);
     }
 })
 
