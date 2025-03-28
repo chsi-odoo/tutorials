@@ -14,26 +14,26 @@ patch(PosStore.prototype, {
         const baseProductInfo = await super.getProductInfo(...arguments);
         const productInfo = baseProductInfo.productInfo;
 
-        console.log(this.models["product.product"])
+        // console.log(this.models["product.product"])
         const actualProduct = this.data.models["product.product"].get(product.id);
-        const actualProduct2 = this.models["product.product"].get(product.id);
-        console.log(actualProduct);
-        console.log(actualProduct2)
+        // const actualProduct2 = this.models["product.product"].get(product.id);
+        // console.log(actualProduct);
+        // console.log(actualProduct2)
         productInfo.weight = actualProduct.weight
         productInfo.volume = actualProduct.volume
         // return baseProductInfo
         return baseProductInfo
     }
 })
-
-patch(ProductScreen.prototype, {
-    onClickRemoveButton() {
-        console.log(this.numberBuffer)
-        const backspaceValue = BACKSPACE.value
-        this.numberBuffer.sendKey(backspaceValue);
-        this.numberBuffer.sendKey(backspaceValue);
-    }
-})
+//
+// patch(ProductScreen.prototype, {
+//     onClickRemoveButton() {
+//         console.log(this.numberBuffer)
+//         const backspaceValue = BACKSPACE.value
+//         this.numberBuffer.sendKey(backspaceValue);
+//         this.numberBuffer.sendKey(backspaceValue);
+//     }
+// })
 
 patch(ControlButtons.prototype, {
     setup() {
@@ -44,8 +44,22 @@ patch(ControlButtons.prototype, {
     onClickRemoveButton() {
         console.log(this.numberBuffer)
         const backspaceValue = BACKSPACE.value
+        // this.pos.numpadMode = 'quantity'
+        // this.numberBuffer.state.buffer = null;
+                // the buffer should not be in reset state anymore.
+        // this.numberBuffer.isReset = false;
+        // it should not be in a start the buffer over state anymore.
+        // this.numberBuffer.state.toStartOver = false;
+        // this.numberBuffer.reset();
+        // this.numberBuffer.trigger("buffer-update", this.numberBuffer.state.buffer);
+        // this.numberBuffer.reset();
+
+        this.pos.numpadMode = 'quantity'
+        const numberBuffer = this.numberBuffer;
+        numberBuffer.isReset = false;
+        numberBuffer.state.buffer = null;
         this.numberBuffer.sendKey(backspaceValue);
-        this.numberBuffer.sendKey(backspaceValue);
+        // this.numberBuffer.trigger("buffer-update", this.numberBuffer.state.buffer);
     }
 })
 
