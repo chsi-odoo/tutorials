@@ -16,8 +16,8 @@ class EstateProperty(models.Model):
     _description = "Estate property"
 
     _sql_constraints = [
-        ('check_expected_price', 'CHECK(expected_price > 0)','Expected price must be positive'),
-        ('check_selling_price', 'CHECK(selling_price >= 0)','Selling price must be non-negative'),
+        ('check_expected_price', 'CHECK(expected_price > 0)', 'Expected price must be positive'),
+        ('check_selling_price', 'CHECK(selling_price >= 0)', 'Selling price must be non-negative'),
     ]
 
     _order = "id desc"
@@ -28,11 +28,13 @@ class EstateProperty(models.Model):
         default='new',
         required=True,
         copy=False,
-        selection=[('new', 'New'), ('offer_received', 'Offer Received'), ('offer_accepted', 'Offer Accepted'), ('sold','Sold'),('cancelled','Cancelled')],)
+        selection=[('new', 'New'), ('offer_received', 'Offer Received'), ('offer_accepted', 'Offer Accepted'),
+                   ('sold', 'Sold'), ('cancelled', 'Cancelled')], )
     name = fields.Char(required=True, help='lmao', string="Title")
     description = fields.Text()
     postcode = fields.Char()
-    date_availability = fields.Date(copy=False, default=lambda _: fields.Datetime.today() + relativedelta(months=+3), string="Available From")
+    date_availability = fields.Date(copy=False, default=lambda _: fields.Datetime.today() + relativedelta(months=+3),
+                                    string="Available From")
     expected_price = fields.Float(required=True)
     selling_price = fields.Float(readonly=True, copy=False)
     bedrooms = fields.Integer(default=2)
@@ -45,7 +47,7 @@ class EstateProperty(models.Model):
         selection=[('north', 'North'), ('south', 'South')]
     )
     property_type_id = fields.Many2one("estate.property.type", string="Property Type")
-    salesperson_id = fields.Many2one("res.users", string ="Salesperson", default=lambda self: self.env.user)
+    salesperson_id = fields.Many2one("res.users", string="Salesperson", default=lambda self: self.env.user)
     buyer_id = fields.Many2one("res.partner", string="Buyer", copy=False)
     tag_ids = fields.Many2many("estate.property.tag", string="Tags")
     offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")
@@ -56,7 +58,7 @@ class EstateProperty(models.Model):
         'res.company', string='Company', default=lambda self: self.env.company,
         required=True)
 
-    @api.depends("living_area","garden_area")
+    @api.depends("living_area", "garden_area")
     def _compute_total_area(self: Collection[EstateProperty]):
         for record in self:
             record.total_area = record.living_area + record.garden_area
@@ -85,10 +87,15 @@ class EstateProperty(models.Model):
 
     def action_set_state_sold(self: Collection[EstateProperty]):
         for record in self:
+
             is_cancelled = record.state == 'cancelled'
             if is_cancelled:
                 raise UserError('Canceled properties cannot be sold')
 
+            offer_statuses: Collection[str] = record.offer_ids.mapped('status')
+            is_offer_being_accepted = any(status == 'accepted' for status in offer_statuses)
+            if not is_offer_being_accepted:
+                raise UserError('Properties with no offers cannot be sold')
             record.state = 'sold'
 
     @api.constrains("selling_price")
@@ -99,6 +106,12 @@ class EstateProperty(models.Model):
             is_offer_being_accepted = any(status == 'accepted' for status in offer_statuses)
             if is_offer_being_accepted and record.selling_price < threshold:
                 raise ValidationError(f"The selling price is {record.selling_price}(message is too long...)")
+
+    @api.constrains('offer_ids')
+    def _check_offer_ids(self: Collection[EstateProperty]):
+        for record in self:
+            if record.state == 'sold' or record.state == 'cancelled':
+                raise UserError("Cannot add offers for sold or cancelled properties")
 
     @api.ondelete(at_uninstall=False)
     def _unlink_if_cancellable_state(self: Collection[EstateProperty]):

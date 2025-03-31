@@ -67,7 +67,7 @@ class EstatePropertyOffer(models.Model):
             offer_siblings = estate_property.offer_ids
             print(record)
             is_selected = record.status == 'accepted'
-            is_parent_status_non_terminal = not (estate_property.state == 'accepted' or estate_property.state == 'cancelled')
+            is_parent_status_non_terminal = not (estate_property.state == 'accepted' or estate_property.state == 'sold' or estate_property.state == 'cancelled')
 
             if is_selected:
                 for sibling in filter(lambda x: x.status and x != record, offer_siblings):
@@ -106,6 +106,7 @@ class EstatePropertyOffer(models.Model):
             raise UserError('Cannot create an offer with a lower price')
         created = super(EstatePropertyOffer, self).create(vals)
 
-        estate_property.state = 'offer_received'
+        if estate_property.state == 'new':
+            estate_property.state = 'offer_received'
         return created
 
