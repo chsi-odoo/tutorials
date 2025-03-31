@@ -1,6 +1,7 @@
 {
     'name': "Estate",
     'version': '0.0.1',
+    'category': 'Real Estate/Brokerage',
     'depends': ['base'],
     'author': "Me",
     'application': True,
@@ -22,6 +23,7 @@
         'data/estate.property.csv',
         'data/estate_property_offer.xml',
         'data/estate_property.xml',
+        'security/security.xml',
     ],
     # # data files containing optionally loaded demonstration data
     'demo': [

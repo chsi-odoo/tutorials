@@ -1,4 +1,4 @@
-from odoo import models, Command
+from odoo import models, Command, fields
 
 
 class EstateProperty(models.Model):
@@ -17,8 +17,11 @@ class EstateProperty(models.Model):
         idk_what_is_even_this_value_but_i_have_to_return_it = super().action_set_state_sold()
         for record in self:
             # journal = self.env['account.move'].with_context(default_move_type='out_invoice')._get_default_journal()
-            journal = self._get_default_journal()
-            record.env['account.move'].create(
+            self.check_access_rights('write')
+            self.check_access_rule('write')
+            print(" reached ".center(100, '='))
+            journal = self.sudo()._get_default_journal()
+            record.env['account.move'].sudo().create(
                 {'partner_id': record.buyer_id.id, 'move_type': 'out_invoice', 'journal_id': journal.id,
                  'line_ids': [
                      Command.create(
