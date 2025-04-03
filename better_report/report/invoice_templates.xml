@@ -31,19 +31,19 @@
     <template id="report_invoice_document_inherit_signature" inherit_id="account.report_invoice_document">
         <xpath expr="//div[@id='right-elements']" position="inside">
             <div>
-                <div style="margin-left: 7%;">
-                    <span>Sign here,</span>
-                </div>
-                <div style="margin-bottom: 4cm;"/>
-                <hr style="border-color:black; margin-left: auto; margin-right:auto; width: 80%;"/>
-            </div>
-<!--            <div>-->
-<!--                <div id="signature-sign-here">-->
+<!--                <div style="margin-left: 7%;">-->
 <!--                    <span>Sign here,</span>-->
 <!--                </div>-->
-<!--                <div id="signature-spacing"/>-->
-<!--                <hr id="signature-underline"/>-->
-<!--            </div>-->
+<!--                <div style="margin-bottom: 4cm;"/>-->
+<!--                <hr style="border-color:black; margin-left: auto; margin-right:auto; width: 80%;"/>-->
+            </div>
+            <div>
+                <div id="signature-sign-here">
+                    <span>Sign here,</span>
+                </div>
+                <div id="signature-spacing"/>
+                <hr id="signature-underline"/>
+            </div>
         </xpath>
     </template>
 </odoo>

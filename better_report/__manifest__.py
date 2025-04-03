@@ -8,14 +8,9 @@
         'report/invoice_templates.xml',
         'views/res_partner_views.xml',
     ],
-    # 'assets': {
-    #     'web.assets_backend': [
-    #         'static/src/css/better_report_styles.css',
-    #         'better_report/static/src/css/better_report_styles.css',
-    #     ],
-    #     'web.assets_common': [
-    #         'static/src/css/better_report_styles.css',
-    #         'better_report/static/src/css/better_report_styles.css',
-    #     ]
-    # }
+    'assets': {
+        'web.report_assets_common': [
+            'better_report/static/src/css/better_report_styles.scss',
+        ],
+    }
 }
