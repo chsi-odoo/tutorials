@@ -1,0 +1,17 @@
+.fit-content-container {
+  width: fit-content;
+}
+
+hr.line-breaker {
+  width: 100%; border: 0;
+}
+
+//TODO figure out why is bootstrap not providing this
+//no idea why is bootstrap is not loading this
+.mr-auto {
+  margin-right: auto;
+}
+
+.awesome-card-main {
+  min-width: 18rem;
+}

@@ -54,7 +54,7 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <search string="i do not see this being displayed anywhere">
-                <field name="name"/>
+                <field class="text-custom-defined-color" name="name"/>
                 <field name="postcode"/>
                 <field name="expected_price"/>
                 <field name="bedrooms"/>
@@ -105,7 +105,7 @@
                     <group>
                         <div class="oe_title">
                             <h1>
-                                <field name="name"></field>
+                                <field class="text-custom-defined-color" name="name"></field>
                             </h1>
                         </div>
 

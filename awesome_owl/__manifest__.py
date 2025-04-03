@@ -42,6 +42,9 @@
             # 'web/static/lib/bootstrap/scss/utilities/_api.scss',
             # 'web/static/src/scss/bootstrap_review.scss',
         ],
+        'web.assets_common': [
+            'awesome_owl/static/src/css/awesome_owl_styles.scss'
+        ]
         # ????
         # 'awesome_owl._assets_bootstrap': [
         #     'web/static/src/scss/import_bootstrap.scss',

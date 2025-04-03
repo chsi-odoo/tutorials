@@ -4,8 +4,7 @@
 <!--<odoo>-->
 <templates xml:space="reserved">
     <t t-name="awesome_owl.todo_item">
-        <div t-att-class="{'text-decoration-line-through': this.props.isCompleted, 'text-muted': this.props.isCompleted}"
-             style="width: fit-content;">
+        <div class="fit-content-container" t-att-class="{'text-decoration-line-through': this.props.isCompleted, 'text-muted': this.props.isCompleted}">
             <input class="mx-2" type="checkbox" t-att-checked="this.props.isCompleted" t-on-click="handleCheck"/>
             <span t-out="this.props.id"/>
             <span>.</span>

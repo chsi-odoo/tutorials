@@ -2,7 +2,7 @@
     'name': "Estate",
     'version': '0.0.1',
     'category': 'Real Estate/Brokerage',
-    'depends': ['base','accountant'],
+    'depends': ['base', 'accountant'],
     'author': "Me",
     'application': True,
     'description': """
@@ -29,4 +29,12 @@
     # # data files containing optionally loaded demonstration data
     'demo': [
     ],
+    'assets': {
+        'web.assets_backend': [
+            'estate/static/src/css/estate_styles.scss'
+        ],
+        'web.report_assets_common': [
+            'estate/static/src/css/estate_styles.scss'
+        ],
+    }
 }

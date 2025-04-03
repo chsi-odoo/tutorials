@@ -13,8 +13,8 @@
 
                     <!--hmm cant center the title-->
                     <div class="oe_title"
-                         style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-                        <h1 style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                         >
+                        <h1 >
                             <field name="name"/>
                         </h1>
                     </div>

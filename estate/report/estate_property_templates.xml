@@ -40,7 +40,7 @@
         <!--            <span>hi1</span>-->
         <!--        </div>-->
 
-        <h2 style="margin-top: 20px">
+        <h2 id="report-property-offers-title">
             <span t-field="property.name"/>
         </h2>
 
